@@ -416,20 +416,17 @@ function showHelp(){
   helpOverlay.hidden = false;
   helpOverlay.innerHTML = "";
 
-  helpTargets.forEach((t, i)=>{
+ helpTargets.forEach(t=>{
   if(!t.el) return;
   const r = t.el.getBoundingClientRect();
   const tag = document.createElement("div");
   tag.className = "help-label";
   tag.textContent = t.label;
-
-  const verticalOffset = (i % 2 === 0) ? 8 : 34; // zig-zag
-
   tag.style.left = (r.left + r.width/2) + "px";
-  tag.style.top = (r.bottom + verticalOffset) + "px";
-
+  tag.style.top = (r.bottom + 8) + "px";
   helpOverlay.appendChild(tag);
 });
+
   
 }
 function hideHelp(){
