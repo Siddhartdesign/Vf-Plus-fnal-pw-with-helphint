@@ -258,15 +258,15 @@
 
 #helpHint{
   position: fixed;
-  top: 58px;          /* just below top bar */
-  right: 26px;        /* safely away from canvas edge */
-  font-size: 14px;
+  left: 14px;
+  bottom: 18px;
+  font-size: 15px;
   font-weight: 500;
   color: rgba(255,255,255,0.28);
   z-index: 91;
   user-select: none;
   touch-action: none;
-  padding: 4px;       /* SMALL hit area */
+  pointer-events: auto;
 }
 
 #helpHint:active {
@@ -277,7 +277,7 @@
   position: fixed;
   inset: 0;
   z-index: 90;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .help-label {
@@ -384,7 +384,7 @@ const helpOverlay = document.getElementById("helpOverlay");
 
 let helpTimer = null;
 let helpActive = false;
-const HOLD_MS = 650;
+const HOLD_MS = 420;
     
 /* Bottom bar */
 const dotBtn = document.getElementById("dotBtn");
@@ -438,6 +438,7 @@ function hideHelp(){
 
 /* Press & hold ONLY on ? */
 helpHint.addEventListener("pointerdown", e=>{
+   e.preventDefault();
   e.stopPropagation();
   helpTimer = setTimeout(showHelp, HOLD_MS);
 });
