@@ -437,11 +437,15 @@ function hideHelp(){
 }
 
 /* Press & hold ONLY on ? */
-helpHint.addEventListener("pointerdown", e=>{
-   e.preventDefault();
-  e.stopPropagation();
-  helpTimer = setTimeout(showHelp, HOLD_MS);
-});
+helpHint.addEventListener(
+  "pointerdown",
+  e => {
+    e.preventDefault();
+    e.stopPropagation();
+    helpTimer = setTimeout(showHelp, HOLD_MS);
+  },
+  { capture: true }
+);
 
 helpHint.addEventListener("pointerup", hideHelp);
 helpHint.addEventListener("pointerleave", hideHelp);
