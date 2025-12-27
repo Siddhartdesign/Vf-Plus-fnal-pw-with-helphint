@@ -294,7 +294,7 @@
   box-shadow: 0 8px 22px rgba(0,0,0,0.55);
 
   /* merged transform */
-  transform: translate(-50%, -120%) rotate(-35deg);
+  transform: translate(-50%, -120%) rotate(-90deg);
   transform-origin: left center;
 }
 
@@ -420,16 +420,25 @@ function showHelp(){
   helpOverlay.hidden = false;
   helpOverlay.innerHTML = "";
 
-  helpTargets.forEach(t=>{
-    if(!t.el) return;
-    const r = t.el.getBoundingClientRect();
-    const tag = document.createElement("div");
-    tag.className = "help-label";
-    tag.textContent = t.label;
-    tag.style.left = (r.left + r.width/2) + "px";
-    tag.style.top = (r.bottom + 8) + "px";
-    helpOverlay.appendChild(tag);
-  });
+helpTargets.forEach((t, i)=>{
+  if(!t.el) return;
+  const r = t.el.getBoundingClientRect();
+  const tag = document.createElement("div");
+  tag.className = "help-label";
+  tag.textContent = t.label;
+
+  const verticalOffset = (i % 2 === 0) ? 8 : 34; // zig-zag
+
+tag.style.left = (r.left + r.width / 2) + "px";
+
+const isBottom = r.top > window.innerHeight / 2;
+tag.style.top = isBottom
+  ? (r.top - 40) + "px"      // bottom labels move UP (~½ inch)
+  : (r.bottom + 16) + "px"; // top labels move DOWN (~1 inch)
+
+  helpOverlay.appendChild(tag);
+});
+
 }
 
 function hideHelp(){
@@ -439,6 +448,7 @@ function hideHelp(){
   helpOverlay.hidden = true;
   helpOverlay.innerHTML = "";
 }
+ 
 
 /* Press & hold ONLY on ? */
 helpHint.addEventListener(
