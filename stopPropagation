@@ -291,9 +291,13 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   white-space: nowrap;
-  transform: translate(-50%, -120%);
   box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+
+  /* merged transform */
+  transform: translate(-50%, -120%) rotate(-35deg);
+  transform-origin: left center;
 }
+
 
 </style>
 <link rel="manifest" href="manifest.json">
