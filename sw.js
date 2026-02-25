@@ -1,4 +1,4 @@
-const CACHE_NAME = "vf-plus-v1";
+const CACHE_NAME = "vf-plus-v2";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
